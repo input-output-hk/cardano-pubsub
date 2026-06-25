@@ -5,7 +5,7 @@
 [![Status: Experimental](https://img.shields.io/badge/status-experimental-orange)](#project-status)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
-`cardano-pubsub` is a peer-to-peer publish/subscribe communication layer that lets nodes exchange messages reliably without relying on centralized brokers. Topic membership and trusted relay roles are anchored on the Cardano blockchain, so the network can establish who may participate and route traffic using on-chain state rather than a central authority.
+`cardano-pubsub` is a peer-to-peer publish/subscribe communication layer that lets nodes exchange messages reliably without relying on centralized brokers. Topic membership and relay (forwarder) roles are anchored on the Cardano blockchain, so peers can independently verify who may participate and route traffic from on-chain state rather than trusting a central authority.
 
 It is built for the Cardano network first, but the messaging layer itself is chain-neutral. Anchoring is an implementation detail of where trust lives, not a constraint on where the system can run.
 
