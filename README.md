@@ -25,8 +25,9 @@ At a high level:
 
 - Nodes subscribe to **topics** and publish messages to them. Subscribers receive messages for the topics they care about.
 - Messages propagate through a **gossip-based** overlay, so delivery does not depend on any single node staying online.
-- A subset of nodes can take on a **forwarder** (relay) role to help edge nodes reach the wider network. These roles are registered on-chain, so peers can verify them rather than trust them blindly.
-- **On-chain anchoring** provides the registry of participants and roles, giving the network a decentralized source of truth for membership and trust.
+- **Every node relays.** A node forwards messages for the topics it subscribes to, and biases its connections toward peers that share those interests — so a message spreads through the nodes that care about its topic, with no privileged set of relayers.
+- For **edge nodes** that cannot maintain broad connectivity, later stages add an optional on-chain **forwarder** role to help them reach the wider network. The role is registered on-chain, so peers can verify it rather than trust it blindly — it improves reachability, it is not a central router.
+- **On-chain anchoring** provides the registry of participants and roles, giving the network a decentralized source of truth for membership and topic registration.
 
 > [!NOTE]
 > The trust and forwarder model is rolled out in stages. Early deployments use a known set of peers; later stages introduce the on-chain forwarder role and the associated trust rules for edge nodes. See the [architecture decision records](node/docs/decisions/) for the design rationale to date.
