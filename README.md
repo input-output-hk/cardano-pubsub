@@ -13,7 +13,7 @@ It is built for the Cardano network first, but the messaging layer itself is cha
 
 This work grew out of our research into secure, dependable peer sampling: the service that continuously supplies each node with a fresh, random set of live peers. Peer sampling is the foundation of any robust gossip-based overlay, and its weakest point is the ability of malicious nodes to overrepresent themselves by injecting links that point back to themselves.
 
-Our point of origin is SecureCyclon, a peer-sampling protocol that deterministically eliminates that attack by turning node descriptors into verifiable communication certificates, and which was shown to stay resilient even with 40% malicious participation:
+Our point of origin is SecureCyclon, a peer-sampling protocol that targets that specific attack by turning node descriptors into verifiable communication certificates:
 
 - Alexandros Antonov and Spyros Voulgaris, 'SecureCyclon: Dependable Peer Sampling', ICDCS '23, July 2023. [IOG paper page](https://www.iog.io/papers/securecyclon-dependable-peer-sampling), [PDF (arXiv 2309.02952)](https://arxiv.org/pdf/2309.02952.pdf).
 
