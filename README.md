@@ -83,6 +83,7 @@ cargo test
 
 ## Documentation
 
+- Architecture overview: [`docs/architecture-overview.md`](docs/architecture-overview.md)
 - Architecture decision records: [`node/docs/decisions/`](node/docs/decisions/)
 - Node crate overview: [`node/README.md`](node/README.md)
 - Contributing guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
