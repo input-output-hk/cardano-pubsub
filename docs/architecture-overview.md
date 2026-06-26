@@ -8,10 +8,12 @@ conducted internally and is not published here.
 ## Summary
 
 The project began from an inherited three-layer design — gossip-based peer
-sampling, a topic-navigation layer, and a dissemination layer on top. During
-formal evaluation we concluded that the guarantees the upper layers needed were
-difficult to uphold cleanly under that composition, and that the stack carried
-more complexity and trust surface than the prototype warranted.
+sampling, a topic-navigation layer, and a dissemination layer on top. Our formal
+security analysis identified **concrete security weaknesses** in that stack: the
+foundational assumption the upper layers depend on does not hold as specified,
+and the layers introduce further attack surface of their own. We consider these
+issues disqualifying for the prototype, which is why we are **not** pursuing the
+layered stack.
 
 We therefore pivoted to a **list-based architecture**: peer sampling and
 navigation collapse into an **on-chain subscription list**, the dissemination
@@ -37,24 +39,28 @@ the property that local views faithfully stand in for the global network.
 
 ## Why we changed direction
 
-Our evaluation focused on whether that load-bearing assumption actually holds
-across the composed stack, and on the trust and complexity each layer added.
-Without going into specifics, we found that:
+Our formal analysis evaluated whether that load-bearing assumption holds across
+the composed stack, and what an adversary could do against it. It surfaced
+genuine security issues — not merely complexity or rough edges. At a high level:
 
-- The properties the upper layers relied on were **not ones we were comfortable
-  depending on** under the composed design, and the available fixes did not
-  compose cleanly — improving one layer's property tended to weaken another's.
-- The layers were **structurally at odds**: one was designed to avoid imposing
-  structure, while another deliberately introduced it, and the costs of
-  inheriting properties up the stack were not free.
-- The overall **trust surface and complexity** were higher than a first
-  prototype needs, and several of the hardest questions had no finished
-  specification.
+- **The foundational assumption does not hold.** The property the upper layers
+  rely on — that local sampling faithfully stands in for the global network —
+  fails as specified, which makes the security arguments built on top of it
+  unsound.
+- **The upper layers add exploitable surface.** Beyond the base assumption, the
+  analysis identified ways a motivated adversary could bias or disrupt the
+  overlay for targeted participants, with no defence specified in the inherited
+  design.
+- **The weaknesses do not patch cleanly.** Some are hard to detect, and fixes for
+  one layer tended to weaken another, so there was no clean repair within the
+  layered approach.
 
-The detailed analysis behind these conclusions is kept internal. The takeaway
-for this repository is the architectural one: we preferred a design with a
-**smaller, more explicit trust model** over one whose guarantees were hard to
-establish.
+These are the substantive reason we moved to the list-based design below — a
+design with a **smaller, more explicit trust model** that does not rest on the
+assumption we found wanting. We are **deliberately not publishing the specific
+attacks, their parameters, or the quantitative results**: disclosing exploitable
+detail before mitigations exist would not be responsible. That analysis is kept
+internal.
 
 ## The list-based architecture
 
